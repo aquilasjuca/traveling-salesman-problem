@@ -33,8 +33,8 @@ def main():
 
     for line in dist_reader.get_dist_mat():
         print(line)
-        
-    solver = TSPSolver(cities)
+
+    solver = TSPSolver(dist_reader.get_dist_mat())
 
     print("Hill Climbing:")
     tour, dist = solver.solve_with_hill_climbing()
