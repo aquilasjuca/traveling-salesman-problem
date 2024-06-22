@@ -1,8 +1,10 @@
-from models.traveling_salesman import TravelingSalesman
 from algorithms.hill_climbing import HillClimbing
-from file_management.TSPFileReader import *
-# from algorithms.genetic_algorithm import GeneticAlgorithm
 from algorithms.simulated_annealing import SimulatedAnnealing
+from file_management.TSPFileReader import TSPFileReader
+from models.traveling_salesman import TravelingSalesman
+
+# from algorithms.genetic_algorithm import GeneticAlgorithm
+
 
 class TSPSolver:
     def __init__(self, cities):
@@ -20,32 +22,51 @@ class TSPSolver:
         simulated_annealing = SimulatedAnnealing(self.tsp)
         return simulated_annealing.optimize()
 
-def main():
 
-    archive_name = 'distance.txt'
+def print_menu():
+    print("Escolha o algoritmo para resolver o problema do Caixeiro Viajante:")
+    print("0 - Sair")
+    print("1 - Hill Climbing")
+    print("2 - Algoritmo Genético")
+    print("3 - Têmpera Simulada")
+
+
+def main():
+    archive_name = "distance.txt"
     dist_reader = TSPFileReader(archive_name)
     dist_reader.read_file()
 
-    for line in dist_reader.get_dist_mat():
-        print(line)
-    
     solver = TSPSolver(dist_reader.get_dist_mat())
 
-    print("Hill Climbing:")
-    tour, dist = solver.solve_with_hill_climbing()
-    print("Melhor rota:", tour)
-    print("Distância:", dist)
-    
-    # print("\nAlgoritmo Genético:")
-    # tour, dist = solver.solve_with_genetic_algorithm()
-    # print("Melhor rota:", tour)
-    # print("Distância:", dist)
+    while True:
+        print_menu()
+        choice = input("Digite a sua escolha: ")
 
-    print("\nTêmpera Simulada:")
-    tour, dist = solver.solve_with_simulated_annealing()
-    print("Melhor rota:", tour)
-    print("Distância:", dist)
+        if choice == "1":
+            print("Hill Climbing:")
+            tour, dist = solver.solve_with_hill_climbing()
+            print("Melhor rota:", tour)
+            print("Distância:", dist)
+
+        elif choice == "2":
+            # print("Algoritmo Genético:")
+            # tour, dist = solver.solve_with_genetic_algorithm()
+            # print("Melhor rota:", tour)
+            # print("Distância:", dist)
+            print("Algoritmo Genético ainda não implementado.")
+
+        elif choice == "3":
+            print("Têmpera Simulada:")
+            tour, dist = solver.solve_with_simulated_annealing()
+            print("Melhor rota:", tour)
+            print("Distância:", dist)
+
+        elif choice == "0":
+            break
+
+        else:
+            print("Escolha inválida. Tente novamente.")
+
 
 if __name__ == "__main__":
     main()
-
