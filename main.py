@@ -3,6 +3,7 @@ import time
 from algorithms.hill_climbing import HillClimbing
 from algorithms.simulated_annealing import SimulatedAnnealing
 from file_management.TSPFileReader import TSPFileReader
+from file_management.BestSolutionReader import BestSolutionReader
 from models.traveling_salesman import TravelingSalesman
 from algorithms.genetic import Genetic
 
@@ -34,9 +35,11 @@ def print_menu():
 
 def main():
     archive_name = "distance.txt"
+    another_archive_name = "path.txt"
     dist_reader = TSPFileReader(archive_name)
     dist_reader.read_file()
-
+    sol = BestSolutionReader(another_archive_name)
+    solucao_otima = sol.read_file()
     solver = TSPSolver(dist_reader.get_dist_mat())
 
     while True:
@@ -52,7 +55,8 @@ def main():
             print("Melhor rota:", tour)
             print("Distância:", dist)
             print(f"Tempo gasto: {elapsed_time:.2f} segundos")
-
+            print("Solução Ótima:", solucao_otima)
+            
         elif choice == "2":
             print("Algoritmo Genético:")
             start_time = time.time()
@@ -72,6 +76,7 @@ def main():
             print("Melhor rota:", tour)
             print("Distância:", dist)
             print(f"Tempo gasto: {elapsed_time:.2f} segundos")
+            print("Solução Ótima:", solucao_otima)
 
         elif choice == "0":
             break
