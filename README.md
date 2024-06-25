@@ -75,7 +75,7 @@ Para garantir um ambiente consistente e isolado para a execução deste projeto,
 
 ## Observação
 
-Nós utilizamos os dados 'FIVE' disponíveis neste [site](https://people.sc.fsu.edu/~jburkardt/datasets/tsp/tsp.html).
+Nós utilizamos a base de dados 'FIVE' disponíveis neste [site](https://people.sc.fsu.edu/~jburkardt/datasets/tsp/tsp.html).
 
 ## Contribuições
 
