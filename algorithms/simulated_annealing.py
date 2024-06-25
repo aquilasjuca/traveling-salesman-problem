@@ -28,6 +28,8 @@ class SimulatedAnnealing:
         best_distance = current_distance
 
         temperature = self.initial_temp
+        step_count = 0
+
         while temperature > self.min_temp:
             i, j = sorted(random.sample(range(n), 2))
             new_tour = self.two_opt_swap(current_tour, i, j)
@@ -41,6 +43,12 @@ class SimulatedAnnealing:
                     best_tour = current_tour[:]
                     best_distance = current_distance
 
+            step_count += 1
+
             temperature *= self.cooling_rate
 
+        self.print_step_count(step_count)
         return best_tour, best_distance
+
+    def print_step_count(self, step_count):
+        print(f"Quantidade de passos: {step_count}")

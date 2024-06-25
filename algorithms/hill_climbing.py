@@ -11,6 +11,8 @@ class HillClimbing:
         random.shuffle(current_tour)
         current_distance = self.tsp.distance(current_tour)
 
+        step_count = 0
+
         while True:
             neighbors = []
             for i in range(n):
@@ -24,8 +26,12 @@ class HillClimbing:
 
             if best_neighbor_distance < current_distance:
                 current_tour, current_distance = best_neighbor, best_neighbor_distance
+                step_count += 1
             else:
                 break
 
+        self.print_step_count(step_count)
         return current_tour, current_distance
 
+    def print_step_count(self, step_count):
+        print(f"Número de passos: {step_count}")
