@@ -4,7 +4,6 @@ class TSPFileReader:
         self.num_city = 0
         self.dist_mat = []
         
-
     def read_file(self):
         with open(self.file_name, 'r') as file:
             lines = file.readlines()
