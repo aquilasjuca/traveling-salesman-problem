@@ -3,6 +3,7 @@ import time
 from algorithms.hill_climbing import HillClimbing
 from algorithms.simulated_annealing import SimulatedAnnealing
 from file_management.TSPFileReader import TSPFileReader
+from file_management.SolutionReader import BestSolutionReader
 from models.traveling_salesman import TravelingSalesman
 from algorithms.genetic import Genetic
 
@@ -23,6 +24,9 @@ class TSPSolver:
         simulated_annealing = SimulatedAnnealing(self.tsp)
         return simulated_annealing.optimize()
 
+    def compare_solutions(self, tour, best_solution):
+        return tour == best_solution
+
 
 def print_menu():
     print("Escolha o algoritmo para resolver o problema do Caixeiro Viajante:")
@@ -34,8 +38,14 @@ def print_menu():
 
 def main():
     archive_name = "distance.txt"
+    best_solution_file_name = "best_solution.txt"
+
     dist_reader = TSPFileReader(archive_name)
     dist_reader.read_file()
+
+    best_solution_reader = BestSolutionReader(best_solution_file_name)
+    best_solution_reader.read_file()
+    best_solution = best_solution_reader.get_best_solution()
 
     solver = TSPSolver(dist_reader.get_dist_mat())
 
@@ -49,9 +59,12 @@ def main():
             tour, dist = solver.solve_with_hill_climbing()
             end_time = time.time()
             elapsed_time = end_time - start_time
+            is_equal = solver.compare_solutions(tour, best_solution)
             print("Melhor rota:", tour)
             print("Distância:", dist)
             print(f"Tempo gasto: {elapsed_time:.2f} segundos")
+            print("Solução Ótima:", best_solution)
+            print("As soluções são iguais?" if is_equal else "As soluções são diferentes.")
 
         elif choice == "2":
             print("Algoritmo Genético:")
@@ -59,9 +72,12 @@ def main():
             tour, dist = solver.solve_with_genetic_algorithm()
             end_time = time.time()
             elapsed_time = end_time - start_time
+            is_equal = solver.compare_solutions(tour, best_solution)
             print("Melhor rota:", tour)
             print("Distância:", dist)
             print(f"Tempo gasto: {elapsed_time:.2f} segundos")
+            print("Solução Ótima:", best_solution)
+            print("As soluções são iguais?" if is_equal else "As soluções são diferentes.")
 
         elif choice == "3":
             print("Têmpera Simulada:")
@@ -69,9 +85,12 @@ def main():
             tour, dist = solver.solve_with_simulated_annealing()
             end_time = time.time()
             elapsed_time = end_time - start_time
+            is_equal = solver.compare_solutions(tour, best_solution)
             print("Melhor rota:", tour)
             print("Distância:", dist)
             print(f"Tempo gasto: {elapsed_time:.2f} segundos")
+            print("Solução Ótima:", best_solution)
+            print("As soluções são iguais?" if is_equal else "As soluções são diferentes.")
 
         elif choice == "0":
             break
