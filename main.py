@@ -16,8 +16,13 @@ class TSPSolver:
         return hill_climbing.optimize()
 
     def solve_with_genetic_algorithm(self):
+<<<<<<< HEAD
         genetic_algorithm = Genetic(self.tsp)
         return genetic_algorithm.optimize()
+=======
+         genetic_algorithm = Genetic(self.tsp)
+         return genetic_algorithm.optimize()
+>>>>>>> 9296437 (commitando alterações revertidas)
 
     def solve_with_simulated_annealing(self):
         simulated_annealing = SimulatedAnnealing(self.tsp)
