@@ -67,12 +67,5 @@ class Genetic:
             self.steps += 1
 
         print("Número de passos (generations):", self.steps)
-<<<<<<< HEAD
-<<<<<<< HEAD
+
         return best_tour, best_distance
-=======
-        return best_tour, best_distance
->>>>>>> 9296437 (commitando alterações revertidas)
-=======
-        return best_tour, best_distance
->>>>>>> 5c9b40c (Corrgindo erros para comparar)
