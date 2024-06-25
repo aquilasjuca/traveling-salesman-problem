@@ -5,8 +5,7 @@ from algorithms.simulated_annealing import SimulatedAnnealing
 from file_management.TSPFileReader import TSPFileReader
 from file_management.BestSolutionReader import BestSolutionReader
 from models.traveling_salesman import TravelingSalesman
-
-# from algorithms.genetic_algorithm import GeneticAlgorithm
+from algorithms.genetic import Genetic
 
 
 class TSPSolver:
@@ -17,9 +16,9 @@ class TSPSolver:
         hill_climbing = HillClimbing(self.tsp)
         return hill_climbing.optimize()
 
-# def solve_with_genetic_algorithm(self):
-    #     genetic_algorithm = GeneticAlgorithm(self.tsp)
-    #     return genetic_algorithm.optimize()
+    def solve_with_genetic_algorithm(self):
+        genetic_algorithm = Genetic(self.tsp)
+        return genetic_algorithm.optimize()
 
     def solve_with_simulated_annealing(self):
         simulated_annealing = SimulatedAnnealing(self.tsp)
@@ -59,15 +58,14 @@ def main():
             print("Solução Ótima:", solucao_otima)
             
         elif choice == "2":
-            # print("Algoritmo Genético:")
-            # start_time = time.time()
-            # tour, dist = solver.solve_with_genetic_algorithm()
-            # end_time = time.time()
-            # elapsed_time = end_time - start_time
-            # print("Melhor rota:", tour)
-            # print("Distância:", dist)
-            # print(f"Tempo gasto: {elapsed_time:.2f} segundos")
-            print("Algoritmo Genético ainda não implementado.")
+            print("Algoritmo Genético:")
+            start_time = time.time()
+            tour, dist = solver.solve_with_genetic_algorithm()
+            end_time = time.time()
+            elapsed_time = end_time - start_time
+            print("Melhor rota:", tour)
+            print("Distância:", dist)
+            print(f"Tempo gasto: {elapsed_time:.2f} segundos")
 
         elif choice == "3":
             print("Têmpera Simulada:")
